@@ -5,43 +5,86 @@
   <style>
     body {
       text-align: center;
-      background-color: pink;
       font-family: Arial;
+      background-color: pink;
+      overflow: hidden;
     }
+
+    .heart {
+      position: fixed;
+      color: red;
+      font-size: 20px;
+      animation: fall 5s linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10%); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
     .box {
-      margin-top: 100px;
+      margin-top: 150px;
       background: white;
-      padding: 30px;
+      padding: 40px;
       border-radius: 20px;
+      display: inline-block;
     }
+
     button {
-      padding: 10px 20px;
+      padding: 12px 25px;
       margin: 10px;
       font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
     }
+
+    #yes {
+      background-color: red;
+      color: white;
+    }
+
     #no {
+      background-color: gray;
+      color: white;
       position: absolute;
     }
   </style>
 </head>
+
 <body>
 
 <div class="box">
-  <h2>Will you be my Valentine? ❤️</h2>
-  <button onclick="yes()">Yes</button>
-  <button id="no" onmouseover="move()">No</button>
+  <h2>Pandu ❤️ Will you be my Valentine?</h2>
+  <button id="yes" onclick="yesClick()">Yes 💖</button>
+  <button id="no" onmouseover="move()">No 😏</button>
 </div>
 
 <script>
-function yes() {
-  alert("Yayyyy ❤️");
+function yesClick() {
+  document.body.innerHTML = "<h1 style='margin-top:200px;color:red;'>Thank you Wifey ❤️<br>From today I'm your Husband 😘</h1>";
 }
+
 function move() {
-  let x = Math.random() * 300;
-  let y = Math.random() * 300;
+  let x = Math.random() * window.innerWidth;
+  let y = Math.random() * window.innerHeight;
   document.getElementById("no").style.left = x + "px";
   document.getElementById("no").style.top = y + "px";
 }
+
+// hearts background
+setInterval(() => {
+  let heart = document.createElement("div");
+  heart.innerHTML = "❤️";
+  heart.classList.add("heart");
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 5000);
+}, 300);
 </script>
 
 </body>
